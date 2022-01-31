@@ -1,7 +1,7 @@
 export interface Customer{
-  customerId:number;
+  id:number;
   customerName:string;
-  customerBirthDay:string;
+  customerBirthDate:string;
   customerPhoneNumber:string;
   customerDescription:string;
 }
