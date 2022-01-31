@@ -39,4 +39,7 @@ export class CustomerComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
+  getCustomersDelete(deleteId:number){
+
+  }
 }
