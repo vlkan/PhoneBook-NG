@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NaviComponent implements OnInit {
 
+  currentSearchText:string = "";
+  searchText:string = '';
   constructor() { }
 
   ngOnInit(): void {
   }
+  getSearch(searchText:any){
+    this.currentSearchText = searchText;
+  }
+  getAll(){
 
+  }
 }

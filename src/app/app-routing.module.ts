@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomerComponent } from './components/customer/customer.component';
 
 const routes: Routes = [{ path: '', pathMatch:"full", component: CustomerComponent },
-{ path: 'customers', component: CustomerComponent }
+{ path: 'customers', component: CustomerComponent },
+{ path: 'customers/search/:searchText', component: CustomerComponent }
 ];
 
 @NgModule({
