@@ -1,9 +1,28 @@
-<table class="table">
+<div *ngIf="dataLoaded==false" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Birh Date</th>
+      <th>Phone No.</th>
+      <th>Description</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
   <tr *ngFor="let customer of customers">
-    <td>{{customer.id}}</td>
-    <td>{{customer.customerName}}</td>
-    <td>{{customer.customerBirthDate | date}}</td>
-    <td>{{customer.customerPhoneNumber}}</td>
-    <td>{{customer.customerDescription}}</td>
+    <td>{{ customer.id }}</td>
+    <td>{{ customer.customerName }}</td>
+    <td>{{ customer.customerBirthDate | date }}</td>
+    <td>{{ customer.customerPhoneNumber }}</td>
+    <td>{{ customer.customerDescription }}</td>
+    <td><button type="button" class="btn btn-primary btn-sm">Edit</button></td>
+    <td><button type="button" class="btn btn-danger btn-sm">Delete</button></td>
   </tr>
+</tbody>
 </table>
