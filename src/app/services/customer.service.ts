@@ -22,5 +22,13 @@ export class CustomerService {
     let newPath = this.apiUrl + "customers/search?search=" + searchText
     return this.httpClient.get<ListResponseModel<Customer>>(newPath);
   }
+  getCustomersAdd(customers:Customer){
+    let newPath = this.apiUrl + "customers/add"
+    return this.httpClient.post<ListResponseModel<Customer>>(newPath, customers);
+  }
+  getCustomersDelete(deleteId:number){
+    let newPath = this.apiUrl + "customers/delete"
+    return this.httpClient.post<ListResponseModel<Customer>>(newPath, deleteId);
+  }
 
 }

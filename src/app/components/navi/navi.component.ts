@@ -13,8 +13,8 @@ export class NaviComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  getSearch(searchText:any){
-    this.currentSearchText = searchText;
+  getSearch(){
+    //this.currentSearchText = searchText;
   }
   getAll(){
 
