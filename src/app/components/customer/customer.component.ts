@@ -4,6 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 import { Customer } from 'src/app/models/customer';
 import { CustomerResponseModel } from 'src/app/models/customerResponseModel';
 import { CustomerService } from './../../services/customer.service';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-customer',
@@ -11,14 +17,17 @@ import { CustomerService } from './../../services/customer.service';
   styleUrls: ['./customer.component.css'],
 })
 export class CustomerComponent implements OnInit {
+  userUpdateForm: FormGroup;
   customers: Customer[] = [];
   dataLoaded = false;
 
   deleteU:Customer[] = [];
+  updateU:Customer[] = [];
 
   constructor(private customerService: CustomerService,
      private activatedRoute:ActivatedRoute,
-     private toastrService: ToastrService) {}
+     private toastrService: ToastrService,
+     private formBuilder: FormBuilder,) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -28,7 +37,16 @@ export class CustomerComponent implements OnInit {
       else{
         this.getCustomers()
       }
+      this.createUserUpdateForm()
     })
+  }
+  createUserUpdateForm() {
+    this.userUpdateForm = this.formBuilder.group({
+      customerName: ['', Validators.required],
+      customerBirthDate: ['', Validators.required],
+      customerPhoneNumber: ['', Validators.required],
+      customerDescription: ['', Validators.required],
+    });
   }
 
   getCustomers() {
@@ -51,5 +69,23 @@ export class CustomerComponent implements OnInit {
   deleteUserData(customer:Customer){
     this.deleteU.push(customer)
     console.log(customer)
+  }
+  updateUserData(customer:Customer){
+    this.updateU.push(customer)
+  }
+  updateUser(){
+    if (this.userUpdateForm.valid) {
+      this.customerService.deleteUser(this.updateU[0]).subscribe((response) => {
+
+      })
+
+      let userModel = Object.assign({}, this.userUpdateForm.value);
+      this.customerService.addUser(userModel).subscribe((response) => {
+        console.log(response);
+        this.toastrService.success("User Updated", 'Success');
+      });
+    } else {
+      this.toastrService.error('Form is missing', 'Warning');
+    }
   }
 }

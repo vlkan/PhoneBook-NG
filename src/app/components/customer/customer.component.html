@@ -21,11 +21,11 @@
     <td>{{ customer.customerBirthDate | date }}</td>
     <td>{{ customer.customerPhoneNumber }}</td>
     <td>{{ customer.customerDescription }}</td>
-    <td><button type="button" class="btn btn-primary btn-sm">Edit</button></td>
-    <td><button type="button" (click)="deleteUserData(customer)" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalEdit">Delete</button></td>
+    <td><button type="button" (click)="updateUserData(customer)" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalEdit">Edit</button></td>
+    <td><button type="button" (click)="deleteUserData(customer)" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">Delete</button></td>
   </tr>
   <!-- Modal -->
-<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,5 +39,41 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userUpdateForm">
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Name Surname:</label>
+            <input type="text" id="customerName" class="form-control" formControlName="customerName">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Birth Date:</label>
+            <input type="date" id="customerBirthDate" value="2019-01-03" class="form-control" formControlName="customerBirthDate">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Phone Number:</label>
+            <input type="text" id="customerPhoneNumber" class="form-control" formControlName="customerPhoneNumber">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Description:</label>
+            <textarea class="form-control" id="customerDescription" formControlName="customerDescription"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" (click)="updateUser()" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </tbody>
 </table>
