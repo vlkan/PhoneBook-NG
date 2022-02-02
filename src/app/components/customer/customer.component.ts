@@ -13,6 +13,7 @@ export class CustomerComponent implements OnInit {
   customers: Customer[] = [];
   dataLoaded = false;
 
+
   constructor(private customerService: CustomerService,
      private activatedRoute:ActivatedRoute) {}
 
@@ -39,7 +40,6 @@ export class CustomerComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
-  getCustomersDelete(deleteId:number){
-
+  getDelete(deleteNumber:number){
   }
 }

@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { NaviComponent } from './components/navi/navi.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,12 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass:"toast-bottom-right"
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
