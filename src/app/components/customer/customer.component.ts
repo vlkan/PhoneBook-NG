@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Customer } from 'src/app/models/customer';
 import { CustomerResponseModel } from 'src/app/models/customerResponseModel';
 import { CustomerService } from './../../services/customer.service';
@@ -13,9 +14,11 @@ export class CustomerComponent implements OnInit {
   customers: Customer[] = [];
   dataLoaded = false;
 
+  deleteU:Customer[] = [];
 
   constructor(private customerService: CustomerService,
-     private activatedRoute:ActivatedRoute) {}
+     private activatedRoute:ActivatedRoute,
+     private toastrService: ToastrService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
@@ -40,6 +43,13 @@ export class CustomerComponent implements OnInit {
       this.dataLoaded = true;
     });
   }
-  getDelete(deleteNumber:number){
+  deleteUser(){
+    this.customerService.deleteUser(this.deleteU[0]).subscribe((response) => {
+      this.toastrService.success(response.message, 'Success');
+    })
+  }
+  deleteUserData(customer:Customer){
+    this.deleteU.push(customer)
+    console.log(customer)
   }
 }

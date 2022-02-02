@@ -12,11 +12,6 @@ export class NaviComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-  getSearch(){
-    //this.currentSearchText = searchText;
-  }
-  getAll(){
 
   }
 }

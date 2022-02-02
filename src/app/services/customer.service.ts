@@ -35,5 +35,8 @@ export class CustomerService {
   addUser(customer:Customer):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl+"customers/add", customer)
   }
+  deleteUser(customer:Customer):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"customers/delete", customer)
+  }
 
 }
