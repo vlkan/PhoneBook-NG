@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from './../../models/customer';
 import { CustomerService } from './../../services/customer.service';
+import { FormGroup, FormBuilder, FormControl, Validators } from "@angular/forms"
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -9,26 +11,42 @@ import { CustomerService } from './../../services/customer.service';
 })
 export class NavbarComponent implements OnInit {
 
-  name:string = '';
-  birthdate:string = '';
-  phoneno:string = '';
-  description:string = '';
+  userAddForm : FormGroup;
 
-  customers : Customer[] = [{
-    id : 0,
-    customerName : this.name,
-    customerBirthDate : this.birthdate,
-    customerPhoneNumber : this.phoneno,
-    customerDescription : this.description
-  }];
-
-  constructor(private customerService:CustomerService) { }
+  constructor(private customerService:CustomerService,
+    private formBuilder:FormBuilder,
+    private toastrService:ToastrService) { }
 
   ngOnInit(): void {
+    this.createUserAddForm()
   }
-  getCustomersAdd(){
-    console.log(this.customers[0])
-    this.customerService.getCustomersAdd(this.customers[0])
+
+  createUserAddForm(){
+    this.userAddForm = this.formBuilder.group({
+      customerName:["", Validators.required],
+      customerBirthDate:["", Validators.required],
+      customerPhoneNumber:["", Validators.required],
+      customerDescription:["", Validators.required],
+    })
   }
+
+  addUser(){
+    if(this.userAddForm.valid){
+      let userModel = Object.assign({}, this.userAddForm.value)
+      this.customerService.addUser(userModel).subscribe(response=>{
+        console.log(response)
+        this.toastrService.success(response.message, "Success")
+      })
+
+    }
+    else{
+      this.toastrService.error("Form is missing","Warning")
+    }
+
+  }
+  // getCustomersAdd(){
+  //   console.log(this.customers[0])
+  //   this.customerService.getCustomersAdd(this.customers[0])
+  // }
 
 }
